@@ -4,12 +4,15 @@ public class State {
     LinkedHashSet<Item> items;
     HashMap<String, State> transition;
 
+    // initialise from a grammar and a core item set
+    // generate closure from grammar
     public State(Grammar grammar, HashSet<Item> coreItems){
         items = new LinkedHashSet<>(coreItems);
         transition = new HashMap<>();
         closure(grammar);
     }
 
+    // generate closure from grammar
     private void closure(Grammar grammar){
         boolean finished;
         do{
@@ -29,6 +32,7 @@ public class State {
         } while(!finished);
     }
 
+    // used by closure() to create an item set from rules
     private HashSet<Item> createItem(HashSet<Rule> rules){
         HashSet<Item> itemset = new HashSet<>();
         for (Rule rule : rules)

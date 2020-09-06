@@ -13,7 +13,8 @@ public class Grammar {
         terminals = new HashSet<>();
         nonterminals = new HashSet<>();
 
-        // read and initialise rules line-by-line from "leftside -> rightside | rightside | rightside |..."
+        // read and initialise rules (leftside, rightside, start) line-by-line
+        // format: "leftside -> rightside | rightside | rightside |..."
         boolean startflag = false;
         for (String line : s.split("\n")){
             String[] sides = line.split("->");
@@ -56,6 +57,18 @@ public class Grammar {
         for(int i = 0 ; i < rules.size(); i ++)
             if(rules.get(i).equals(rule)) return i;
         return -1;
+    }
+
+    public boolean isNonTerminal(String str){
+        return nonterminals.contains(str);
+    }
+
+    public HashSet<Rule> getRuleByLeftside(String leftside){
+        HashSet<Rule> ruleset = new HashSet<>();
+        for (Rule rule : rules)
+            if (rule.getLeftSide().equals(leftside))
+                ruleset.add(rule);
+        return ruleset;
     }
 
     @Override

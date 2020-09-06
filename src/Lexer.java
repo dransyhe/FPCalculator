@@ -70,7 +70,7 @@ public class Lexer {
     public Token nextToken() throws LexerException{
         Token token = new Token();
         whitespace();
-        if (idx >= len) {
+        if (str.charAt(idx) == '$') {
             token.type = Token.EOL;
             token.str = "EOL";
         }
@@ -127,9 +127,10 @@ public class Lexer {
 
     public void start(){
         //while (true){
-            Scanner con = new Scanner(System.in);
+            Scanner input = new Scanner(System.in);
             System.out.print("Type your expression: ");
-            line = con.nextLine();
+            line = input.nextLine();
+            line += '$';
 
             initLexer(line);
             currentToken = nextToken();
@@ -137,68 +138,68 @@ public class Lexer {
         //}
     }
 /*
-    public double expressionAdd(){
-        double left = expressionSub();
+    public double E1(){
+        double left = E2();
         if (currentToken.type == Token.ADD){
             System.out.println("exprADD : " + currentToken.str + "is type" + currentToken.type);
             currentToken = nextToken();
-            left += expressionSub();
+            left += E2();
         }
         while (currentToken.type == Token.ADD){
             System.out.println("exprADD : " + currentToken.str + "is type" + currentToken.type);
             currentToken = nextToken();
-            left += expressionSub();
+            left += E2();
         }
         return left;
     }
 
-    public double expressionSub(){
-        double left = expressionMul();
+    public double E2(){
+        double left = E3();
         if (currentToken.type == Token.SUB){
             System.out.println("exprSUB : " + currentToken.str + "is type" + currentToken.type);
             currentToken = nextToken();
-            left -= expressionMul();
+            left -= E3();
         }
         while (currentToken.type == Token.SUB){
             System.out.println("exprSUB : " + currentToken.str + "is type" + currentToken.type);
             currentToken = nextToken();
-            left -= expressionMul();
+            left -= E3();
         }
         return left;
     }
 
     // change to right associative
-    public double expressionMul(){
-        double left = expressionCos();
+    public double E3(){
+        double left = E4();
         if (currentToken.type == Token.MUL){
             System.out.println("exprMUL : " + currentToken.str + "is type" + currentToken.type);
             currentToken = nextToken();
-            left *= expressionCos();
+            left *= E4();
         }
         while (currentToken.type == Token.MUL){
             System.out.println("exprMUL : " + currentToken.str + "is type" + currentToken.type);
             currentToken = nextToken();
-            left *= expressionCos();
+            left *= E4();
         }
         return left;
     }
 
-    public double expressionCos(){
-        double left = expressionFac();
+    public double E4(){
+        double left = E5();
         if (currentToken.type == Token.COS){
             System.out.println("exprCOS : " + currentToken.str + "is type" + currentToken.type);
             currentToken = nextToken();
-            left += expressionFac();
+            left += E5();
         }
         while (currentToken.type == Token.COS){
             System.out.println("exprCOS : " + currentToken.str + "is type" + currentToken.type);
             currentToken = nextToken();
-            left += expressionFac();
+            left += E5();
         }
         return left;
     }
 
-    public double expressionFac(){
+    public double E5(){
         double left = factor();
         if (currentToken.type == Token.FAC){
             System.out.println("exprFAC : " + currentToken.str + "is type" + currentToken.type);

@@ -4,11 +4,13 @@ import java.util.Objects;
 public class Item extends Rule{
     protected int dotPointer;
 
+    // initialise from (leftside, rightside, dotpointer)
     public Item(String leftSide, String[] rightSide, int dotPointer){
         super(leftSide, rightSide);
         this.dotPointer = dotPointer;
     }
 
+    // intialise from a Rule (need to initialise dotPointer position)
     public Item(Rule rule){
         super(rule.getLeftSide(), rule.getRightSide());
         if (rule.getRightSide().length == 1 && rule.getRightSide()[0].equals("epsilon"))
@@ -17,6 +19,7 @@ public class Item extends Rule{
             dotPointer = 0;
     }
 
+    // initialise from an Item
     public Item(Item item){
         super(item);
         this.dotPointer = item.getDotPointer();
@@ -26,12 +29,14 @@ public class Item extends Rule{
         return dotPointer;
     }
 
+    // advances dotPointer by one step
     public boolean goTo(){
         if (dotPointer >= rightSide.length) return false;
         dotPointer ++;
         return true;
     }
 
+    // get the current terminal marked by dotPointer
     public String getCurrentTerminal(){
         if (dotPointer == rightSide.length) return null;
         return rightSide[dotPointer];
