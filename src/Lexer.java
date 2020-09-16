@@ -16,7 +16,7 @@ public class Lexer {
         len = str.length();
     }
 
-    public ArrayList<Token> lex(String str){
+    public ArrayList<Token> lex(){
         ArrayList<Token> tokens = new ArrayList<>();
         str += "$";
         Lexer lexer = new Lexer(str);
