@@ -1,0 +1,8 @@
+E1 -> E1 + E2 | E1
+E2 -> E2 - E3 | E3
+E3 -> E3 * E4 | E4
+E4 -> cos E4 | E5
+E5 -> E5 ! | ( E1 ) | int | float
+float -> int . num | . num | int .
+int -> num
+num -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9

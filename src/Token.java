@@ -2,12 +2,6 @@ public class Token {
     public int type;
     public double value;
     public String str;
-    //attribute;
-
-    //peek;
-    //lookahead;
-    //advance;
-    //defer;
 
     public static final int EOL=0;     // End Of Line
     public static final int PAL=1;     // Left Parenthesis

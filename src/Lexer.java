@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -7,13 +9,22 @@ public class Lexer {
     private String str;
     private int idx;
     private int len;
-    private String line;
-    //private static Map<String, String> map = new HashMap<String, String>();
 
-    public void initLexer(String str) {
+    public Lexer(String str) {
         this.str = str;
         idx = 0;
         len = str.length();
+    }
+
+    public ArrayList<Token> lex(String str){
+        ArrayList<Token> tokens = new ArrayList<>();
+        str += "$";
+        Lexer lexer = new Lexer(str);
+        do {
+            currentToken = nextToken();
+            tokens.add(currentToken);
+        } while (currentToken.type != Token.EOL);
+        return tokens;
     }
 
     private void whitespace(){
@@ -42,6 +53,7 @@ public class Lexer {
                 }
             }
         }
+        /*
         if (idx < len && (str.charAt(idx) == 'e' || str.charAt(idx) == 'E')){
             idx ++;
             double base = 10;
@@ -63,7 +75,7 @@ public class Lexer {
             else{
                 throw new LexerException("Illegal floating point number representation!");
             }
-        }
+        }*/
         return number;
     }
 
@@ -120,23 +132,6 @@ public class Lexer {
         return token;
     }
 
-    public static void main(String[] args) {
-        Lexer lexer = new Lexer();
-        lexer.start();
-    }
-
-    public void start(){
-        //while (true){
-            Scanner input = new Scanner(System.in);
-            System.out.print("Type your expression: ");
-            line = input.nextLine();
-            line += '$';
-
-            initLexer(line);
-            currentToken = nextToken();
-            //expressionAdd();
-        //}
-    }
 /*
     public double E1(){
         double left = E2();

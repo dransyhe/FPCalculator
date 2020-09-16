@@ -23,5 +23,4 @@ public class Action {
     public static final int ACCEPT = 0;
     public static final int SHIFT = 1;
     public static final int REDUCE = 2;
-    public static final int ERROR = 3;
 }
