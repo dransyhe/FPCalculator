@@ -9,6 +9,6 @@ A lexer and LR(0) parser supporting signed floating-point arithmetic expressions
 "!": monadic postfix
 ```
 
-# TO-DO:
+### TO-DO:
 
 to include scientific notation (e/E) for lexer, more exception handling
